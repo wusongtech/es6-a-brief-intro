@@ -159,34 +159,11 @@ foo(); // 42
                         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters" target="_blank">Default parameters</a>
                     </p>
                 </section>
-
-                <section>
-                    <h2>解构</h2>
-                    <h2>Destructuring</h2>
-                    <p>
-                        <pre><code class="hljs" data-trim contenteditable>
-'use strict';
-
-var [a,b,c]= [1,2,3];
-console.log( a, b, c ); // 1 2 3
-var {x:x,y:y,z:z} = { x: 4, y: 5, z:6 };
-console.log( x, y, z ); // 4 5 6
-
-function foo({x,y}){
-    console.log( x, y );
-}
-foo( { y: 1, x: 2 } );// 2 1
-foo( { y: 42 } );// undefined 42
-foo( {} );// undefined undefined
-                        </code></pre>
-                    </p>
-                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank">MDN Destructuring assignment</a></p>
-                </section>
                 <section>
                     <h2>对象语法拓展</h2>
                     <h3>Object Literal Extensions</h3>
                     <p>
-                        <pre><code class="hljs" data-trim contenteditable>
+                    <pre><code class="hljs" data-trim contenteditable>
 'use strict';
 
 var x=2,y=3,
@@ -215,6 +192,28 @@ var x=2,y=3,//Concise Methods
                         </code></pre>
                     </p>
                     <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals" target="_blank">MDN Grammer and types: Object literals</a></p>
+                </section>
+                <section>
+                    <h2>解构</h2>
+                    <h2>Destructuring</h2>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+
+var [a,b,c]= [1,2,3];
+console.log( a, b, c ); // 1 2 3
+var {x:x,y:y,z:z} = { x: 4, y: 5, z:6 };
+console.log( x, y, z ); // 4 5 6
+
+function foo({x,y}){
+    console.log( x, y );
+}
+foo( { y: 1, x: 2 } );// 2 1
+foo( { y: 42 } );// undefined 42
+foo( {} );// undefined undefined
+                        </code></pre>
+                    </p>
+                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank">MDN Destructuring assignment</a></p>
                 </section>
                 <section>
                     <h2>箭头函数</h2>
