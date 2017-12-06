@@ -56,23 +56,16 @@
                     <h2>新特性</h2>
                     <ol type="1">
                         <li>块级作用域变量声明: let/const</li>
-                        <li>箭头函数</li>
-                        <li>spread/rest operator, object literal extension... </li>
+                        <li>箭头函数：=></li>
+                        <li>不定参数、默认参数, 对象语法扩展，解构... </li>
                         <li>模块</li>
                     </ol>
                     <p><a href="https://kangax.github.io/compat-table/es6/" target="_blank">Browser Compatibility</a></p>
                 </section>
                 <section>
                     <h2>块级作用域变量声明</h2>
+                    <h3>Block-Scoped Declarations</h3>
                     <p><code>let</code>/<code>const</code></p>
-                    <p>
-                        <pre><code class="hljs" data-trim contenteditable>
-var a=2;
-(function IIFE(){ var a=3;
-console.log( a );
-})();
-                        </code></pre>
-                    </p>
                     <p>
                         <pre><code class="hljs" data-trim contenteditable>
 var a=2;
@@ -99,7 +92,39 @@ console.log( a );
                     </p>
                 </section>
                 <section>
-                    <h2>Spread/Rest</h2>
+                    <h2>模板字符串</h2>
+                    <h3>Template Literals</h3>
+                    <p>
+                    <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+var text =
+`Now is the time for
+    all good men to come to the aid of their country!`;
+console.log( text );
+
+var name = "Kyle";
+var greeting = `Hello ${name}!`;
+console.log( greeting ); // "Hello Kyle!"
+console.log( typeof greeting );// "string"
+
+
+function foo(str) {
+    var name = "foo";
+    console.log( str );
+}
+function bar() {
+    var name = "bar";
+    foo( `Hello from ${name}!` );
+}
+var name = "global";
+bar(); // "Hello from bar!"
+                        </code></pre>
+                    </p>
+                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings" target="_blank">MDN Template Strings</a></p>
+                </section>
+                <section>
+                    <h2>展开/取余</h2>
+                    <h3>Spread/Rest</h3>
                     <p>
                         <pre><code class="hljs" data-trim contenteditable>
 'use strict';
@@ -119,6 +144,7 @@ foo( 1, 2, 3, 4, 5 ); // 1 2 [3,4,5]
                     </p>
                 </section>
                 <section>
+                    <h2>默认参数</h2>
                     <h2>Default Parameter Values</h2>
                     <p>
                         <pre><code class="hljs" data-trim contenteditable>
@@ -129,32 +155,13 @@ function foo(x = 11, y = 31) {
 foo(); // 42
                         </code></pre>
                     </p>
-                    <p>
-                        <pre><code class="hljs" data-trim contenteditable>
-'use strict';
-
-function bar(val) {
-    console.log( "bar called!" );
-    return y + val;
-}
-function foo(x=y+3,z=bar(x)){
-    console.log( x, z );
-}
-var y=5;
-foo();// "bar called"
-      // 8 13
-foo( 10 );// "bar called"
-     // 10 15
-y=6;
-foo( undefined, 10 );// 9 10
-                        </code></pre>
-                    </p>
                     <p>More info:
                         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters" target="_blank">Default parameters</a>
                     </p>
                 </section>
 
                 <section>
+                    <h2>解构</h2>
                     <h2>Destructuring</h2>
                     <p>
                         <pre><code class="hljs" data-trim contenteditable>
@@ -176,7 +183,8 @@ foo( {} );// undefined undefined
                     <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank">MDN Destructuring assignment</a></p>
                 </section>
                 <section>
-                    <h2>Object Literal Extensions</h2>
+                    <h2>对象语法拓展</h2>
+                    <h3>Object Literal Extensions</h3>
                     <p>
                         <pre><code class="hljs" data-trim contenteditable>
 'use strict';
@@ -209,36 +217,7 @@ var x=2,y=3,//Concise Methods
                     <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals" target="_blank">MDN Grammer and types: Object literals</a></p>
                 </section>
                 <section>
-                    <h2>Template Literals</h2>
-                    <p>
-                        <pre><code class="hljs" data-trim contenteditable>
-'use strict';
-var text =
-`Now is the time for
-    all good men to come to the aid of their country!`;
-console.log( text );
-
-var name = "Kyle";
-var greeting = `Hello ${name}!`;
-console.log( greeting ); // "Hello Kyle!"
-console.log( typeof greeting );// "string"
-
-
-function foo(str) {
-    var name = "foo";
-    console.log( str );
-}
-function bar() {
-    var name = "bar";
-    foo( `Hello from ${name}!` );
-}
-var name = "global";
-bar(); // "Hello from bar!"
-                        </code></pre>
-                    </p>
-                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings" target="_blank">MDN Template Strings</a></p>
-                </section>
-                <section>
+                    <h2>箭头函数</h2>
                     <h2>Arrow Functions</h2>
                     <p>
                         <pre><code class="hljs" data-trim contenteditable>
@@ -267,28 +246,8 @@ var b = new Bar();
                     <p>More info: <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">MDN Arrow Functions</a></p>
                 </section>
                 <section>
-                    <h2>for..of Loops</h2>
-                    <p>
-                        <pre><code class="hljs" data-trim contenteditable>
-'use strict';
-var a = ["a","b","c","d","e"];
-for(var idx in a){
-    console.log( idx );// 0 1 2 3 4
-}
-
-for(var val of a){
-    console.log( val );// "a" "b" "c" "d" "e"
-}
-//for..in loops over the keys/indexes in the a array,
-//while for..of loops over the values in a array.
-                        </code></pre>
-                    </p>
-                    <p>More info:
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank">MDN for...of</a>
-                    </p>
-                </section>
-                <section>
-                    <h2>Classes</h2>
+                    <h2>类</h2>
+                    <h3>Classes</h3>
                     <p>
                         <pre><code class="hljs" data-trim contenteditable>
 'use strict';
@@ -320,8 +279,10 @@ b.gimmeXYZ(); // 1875
                     <p>More info: <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes" target="_blank">MDN Classes</a></p>
                 </section>
                 <section>
+                    <h2>模块</h2>
                     <h2>Modules</h2>
                     <p>ES6 modules are file-based, meaning one module per file. </p>
+                    <p>ES6的模块是基于文件的，也就是说单独一个文件就是一个单独的模块。 </p>
                         <pre><code class="hljs" data-trim contenteditable>
 'use strict';
 export default function foo() { .. }
@@ -339,97 +300,10 @@ BAZ();
                     </p>
                 </section>
                 <section>
-                    <h2>Symbol</h2>
-<pre><code class="hljs" data-trim contenteditable>
-let s = Symbol();
-typeof s
-
-// 没有参数的情况
-var s1 = Symbol();
-var s2 = Symbol();
-
-s1 === s2 // false
-
-// 有参数的情况
-var s1 = Symbol("foo");
-var s2 = Symbol("foo");
-
-s1 === s2 // false
-
-//重复利用的Symbol
-var s1 = Symbol.for('foo');
-var s2 = Symbol.for('foo');
-
-s1 === s2 // true
-</code></pre>
-                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol" target="_blank">MDN Symbol</a></p>
-                </section>
-                <section>
-                    <h2>Iterator</h2>
-<pre><code class="hljs" data-trim contenteditable>
-var Fab = {
-    [Symbol.iterator]() {
-        var n1 = 1,
-        n2 = 1;
-        return {
-            next() {
-                var current = n2;
-                n2 = n1;
-                n1 = n1 + current;
-                return {value: current, done: false};
-            }
-        };
-    }
-};
-for (var v of Fab) {
-    //数列是无限的，需要借助break跳出循环
-    console.log( v );
-    if (v > 50) {
-        break;
-    }
-}
-</code></pre>
-                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols" target="_blank">MDN Iteration protocols</a></p>
-                </section>
-                <section>
-                    <h2>Generator</h2>
-<pre><code class="hljs" data-trim contenteditable>
-function* fab(max) {
-    let [last, current] = [0, 1];
-
-    while(max >= current) {
-        yield current;
-        [last, current] = [current, current + last];
-    }
-}
-
-var o = fab(50), ret, result = [];
-
-while(!(ret = o.next()).done) {
-    result.push(ret.value);
-}
-
-console.log(result); // [1, 1, 2, 3, 5, 8, 13, 21, 34]
-
-console.info([...fab(50)]);
-
-for(let current of fab(50)) {
-    console.info(current);
-}
-</code></pre>
-                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols" target="_blank">MDN Iteration protocols</a></p>
-                </section>
-                <section>
-                    <h2>Transpile ES6</h2>
-                    <p><a href="https://babeljs.io">Babel.js</a></p>
-                    <p><a href="https://github.com/google/traceur-compiler">Traceur.js</a></p>
-                    <p><a href="https://www.typescriptlang.org/">Typescript</a></p>
-                </section>
-                <section>
                     <h2>参考资料地址</h2>
                     <ul>
                         <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference" target="_blank">MDN JavaScript Reference</a></li>
-                        <li><a href="http://www.infoq.com/cn/minibooks/ES6-in-Depth" target="_blank">ECMAScript深入浅出</a></li>
+                        <li><a href="docs/ES6-in-depth.pdf" target="_blank">ECMAScript6 深入浅出</a></li>
                         <li><a href="http://es6.ruanyifeng.com/" target="_blank">ECMAScript 6 入门</a></li>
                         <li><a href="https://github.com/getify/You-Dont-Know-JS/" target="_blank">You Don't Know JS: ES6 & Beyond</a></li>
                     </ul>
