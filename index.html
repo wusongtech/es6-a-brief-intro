@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>ES6</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/league.css" id="theme">
+		<link rel="stylesheet" href="css/style.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>ES6快速指南</h1>
+				</section>
+                <section>
+                    <h2>新特性</h2>
+                    <ol type="1">
+                        <li>块级作用域变量声明: let/const</li>
+                        <li>箭头函数</li>
+                        <li>spread/rest operator, object literal extension... </li>
+                        <li>模块</li>
+                    </ol>
+                    <p><a href="https://kangax.github.io/compat-table/es6/" target="_blank">Browser Compatibility</a></p>
+                </section>
+                <section>
+                    <h2>块级作用域变量声明</h2>
+                    <p><code>let</code>/<code>const</code></p>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+var a=2;
+(function IIFE(){ var a=3;
+console.log( a );
+})();
+                        </code></pre>
+                    </p>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+var a=2;
+{
+    let a=3;
+    console.log( a );
+}
+console.log( a );
+                        </code></pre>
+                    </p>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+{
+    const a=2;
+    console.log( a );
+    a=3;    //TypeError
+}
+                        </code></pre>
+                    </p>
+                    <p>More info:
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" target="_blank">let statements</a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" target="_blank">const statement</a>
+                    </p>
+                </section>
+                <section>
+                    <h2>Spread/Rest</h2>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+var a = [2,3,4];
+var b=[1,...a,5];
+console.log( b ); // [1,2,3,4,5]
+
+function foo(x, y, ...z) {
+    console.log( x, y, z );
+}
+foo( 1, 2, 3, 4, 5 ); // 1 2 [3,4,5]
+                        </code></pre>
+                    </p>
+                    <p>More info:
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator" target="_blank">Spread Operator</a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters" target="_blank">Rest parameters</a>
+                    </p>
+                </section>
+                <section>
+                    <h2>Default Parameter Values</h2>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+function foo(x = 11, y = 31) {
+    console.log( x + y );
+}
+foo(); // 42
+                        </code></pre>
+                    </p>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+
+function bar(val) {
+    console.log( "bar called!" );
+    return y + val;
+}
+function foo(x=y+3,z=bar(x)){
+    console.log( x, z );
+}
+var y=5;
+foo();// "bar called"
+      // 8 13
+foo( 10 );// "bar called"
+     // 10 15
+y=6;
+foo( undefined, 10 );// 9 10
+                        </code></pre>
+                    </p>
+                    <p>More info:
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters" target="_blank">Default parameters</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Destructuring</h2>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+
+var [a,b,c]= [1,2,3];
+console.log( a, b, c ); // 1 2 3
+var {x:x,y:y,z:z} = { x: 4, y: 5, z:6 };
+console.log( x, y, z ); // 4 5 6
+
+function foo({x,y}){
+    console.log( x, y );
+}
+foo( { y: 1, x: 2 } );// 2 1
+foo( { y: 42 } );// undefined 42
+foo( {} );// undefined undefined
+                        </code></pre>
+                    </p>
+                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" target="_blank">MDN Destructuring assignment</a></p>
+                </section>
+                <section>
+                    <h2>Object Literal Extensions</h2>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+
+var x=2,y=3,
+    o={ x: x, y:y};
+var x=2,y=3,//Concise Properties
+    o={x,y};
+
+var x=2,y=3,
+    o={
+        x: function() {
+            // ..
+        },
+        y: function() {
+            // ..
+        }
+    };
+var x=2,y=3,//Concise Methods
+    o={
+        x() {
+            // ..
+        },
+        y() {
+            // ..
+        }
+    };
+                        </code></pre>
+                    </p>
+                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals" target="_blank">MDN Grammer and types: Object literals</a></p>
+                </section>
+                <section>
+                    <h2>Template Literals</h2>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+var text =
+`Now is the time for
+    all good men to come to the aid of their country!`;
+console.log( text );
+
+var name = "Kyle";
+var greeting = `Hello ${name}!`;
+console.log( greeting ); // "Hello Kyle!"
+console.log( typeof greeting );// "string"
+
+
+function foo(str) {
+    var name = "foo";
+    console.log( str );
+}
+function bar() {
+    var name = "bar";
+    foo( `Hello from ${name}!` );
+}
+var name = "global";
+bar(); // "Hello from bar!"
+                        </code></pre>
+                    </p>
+                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_strings" target="_blank">MDN Template Strings</a></p>
+                </section>
+                <section>
+                    <h2>Arrow Functions</h2>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+function foo(x,y) { return x + y;}
+// versus
+var foo=(x,y)=>x+y;
+
+var a = [1,2,3,4,5];
+a=a.map(v=>v*2);
+console.log( a ); // [2,4,6,8,10]
+
+function Bar() {
+    this.myvals = [1,2,3,4,5];
+    // 'this' refers to the Bar instance when run inside an ES6 transpiler
+    //this.myvals.map(function () { console.log(this) });
+    this.myvals.map(() => { console.log(this) });
+    //var self = this;
+    //this.myvals.map(function () { console.log(self) });
+    //this.myvals.map((function () { console.log(this) }).bind(this));
+}
+
+var b = new Bar();
+                        </code></pre>
+                    </p>
+                    <p>More info: <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">MDN Arrow Functions</a></p>
+                </section>
+                <section>
+                    <h2>for..of Loops</h2>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+var a = ["a","b","c","d","e"];
+for(var idx in a){
+    console.log( idx );// 0 1 2 3 4
+}
+
+for(var val of a){
+    console.log( val );// "a" "b" "c" "d" "e"
+}
+//for..in loops over the keys/indexes in the a array,
+//while for..of loops over the values in a array.
+                        </code></pre>
+                    </p>
+                    <p>More info:
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" target="_blank">MDN for...of</a>
+                    </p>
+                </section>
+                <section>
+                    <h2>Classes</h2>
+                    <p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+class Foo {
+    constructor(a,b) {
+        this.x = a;
+        this.y = b;
+    }
+    gimmeXY() {
+        return this.x * this.y;
+    }
+}
+class Bar extends Foo {
+    constructor(a,b,c) {
+        super( a, b );
+        this.z = c;
+    }
+    gimmeXYZ() {
+        return super.gimmeXY() * this.z;
+    }
+}
+var b= new Bar(5,15,25);
+b.x; // 5
+b.y; // 15
+b.z; // 25
+b.gimmeXYZ(); // 1875
+                        </code></pre>
+                    </p>
+                    <p>More info: <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes" target="_blank">MDN Classes</a></p>
+                </section>
+                <section>
+                    <h2>Modules</h2>
+                    <p>ES6 modules are file-based, meaning one module per file. </p>
+                        <pre><code class="hljs" data-trim contenteditable>
+'use strict';
+export default function foo() { .. }
+export function bar() { .. }
+export function baz() { .. }
+
+import FOOFN, { bar, baz as BAZ } from "foo";
+FOOFN();
+bar();
+BAZ();
+                        </code></pre>
+                    <p>More info:
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" target="_blank">import statement</a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" target="_blank">export statement</a>
+                    </p>
+                </section>
+                <section>
+                    <h2>Symbol</h2>
+<pre><code class="hljs" data-trim contenteditable>
+let s = Symbol();
+typeof s
+
+// 没有参数的情况
+var s1 = Symbol();
+var s2 = Symbol();
+
+s1 === s2 // false
+
+// 有参数的情况
+var s1 = Symbol("foo");
+var s2 = Symbol("foo");
+
+s1 === s2 // false
+
+//重复利用的Symbol
+var s1 = Symbol.for('foo');
+var s2 = Symbol.for('foo');
+
+s1 === s2 // true
+</code></pre>
+                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol" target="_blank">MDN Symbol</a></p>
+                </section>
+                <section>
+                    <h2>Iterator</h2>
+<pre><code class="hljs" data-trim contenteditable>
+var Fab = {
+    [Symbol.iterator]() {
+        var n1 = 1,
+        n2 = 1;
+        return {
+            next() {
+                var current = n2;
+                n2 = n1;
+                n1 = n1 + current;
+                return {value: current, done: false};
+            }
+        };
+    }
+};
+for (var v of Fab) {
+    //数列是无限的，需要借助break跳出循环
+    console.log( v );
+    if (v > 50) {
+        break;
+    }
+}
+</code></pre>
+                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols" target="_blank">MDN Iteration protocols</a></p>
+                </section>
+                <section>
+                    <h2>Generator</h2>
+<pre><code class="hljs" data-trim contenteditable>
+function* fab(max) {
+    let [last, current] = [0, 1];
+
+    while(max >= current) {
+        yield current;
+        [last, current] = [current, current + last];
+    }
+}
+
+var o = fab(50), ret, result = [];
+
+while(!(ret = o.next()).done) {
+    result.push(ret.value);
+}
+
+console.log(result); // [1, 1, 2, 3, 5, 8, 13, 21, 34]
+
+console.info([...fab(50)]);
+
+for(let current of fab(50)) {
+    console.info(current);
+}
+</code></pre>
+                    <p>More info: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols" target="_blank">MDN Iteration protocols</a></p>
+                </section>
+                <section>
+                    <h2>Transpile ES6</h2>
+                    <p><a href="https://babeljs.io">Babel.js</a></p>
+                    <p><a href="https://github.com/google/traceur-compiler">Traceur.js</a></p>
+                    <p><a href="https://www.typescriptlang.org/">Typescript</a></p>
+                </section>
+                <section>
+                    <h2>参考资料地址</h2>
+                    <ul>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference" target="_blank">MDN JavaScript Reference</a></li>
+                        <li><a href="http://www.infoq.com/cn/minibooks/ES6-in-Depth" target="_blank">ECMAScript深入浅出</a></li>
+                        <li><a href="http://es6.ruanyifeng.com/" target="_blank">ECMAScript 6 入门</a></li>
+                        <li><a href="https://github.com/getify/You-Dont-Know-JS/" target="_blank">You Don't Know JS: ES6 & Beyond</a></li>
+                    </ul>
+                </section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
