@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {getGrades} from './demo/grades';
 import FOOFN, {bar, baz as BAZ} from './demo/grades';
+import * as gradeService from './demo/grades';
 
 getGrades().filter(person => person.grade >= 85)
 //.forEach(person => console.info(person.name));
@@ -11,6 +12,8 @@ getGrades().filter(person => person.grade >= 85)
 FOOFN();
 bar();
 BAZ();
+
+console.info('gradeService', gradeService);
 
 class App extends Component {
   render() {
